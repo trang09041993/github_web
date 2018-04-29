@@ -56,6 +56,7 @@ public class VocabularyGuideDAO {
 		catch (SQLException e) 
 		{
 			request.setAttribute("msgdschudetuvung",e.getMessage());
+			System.out.println(e.getMessage());
 		}
 				
 		return list;
@@ -112,30 +113,31 @@ public class VocabularyGuideDAO {
 					String vocabularycontentname = rs.getString("vocabularyContentName");
 					String transcribe = rs.getString("transcribe");
 					String image = rs.getString("image");
-					String audiomp3 = rs.getString("audioMp3");
-					String audiogg = rs.getString("audioGg");
+					String audiomp3 = rs.getString("audioMp3");				
 					String mean = rs.getString("mean");
 					
 					vocabularycontent.setVocabularycontentname(vocabularycontentname);
 					vocabularycontent.setTranscribe(transcribe);
 					vocabularycontent.setImage(image);
-					vocabularycontent.setAudiomp3(audiomp3);
-					vocabularycontent.setAudiogg(audiogg);
+					vocabularycontent.setAudiomp3(audiomp3);					
 					vocabularycontent.setMean(mean);
-					
-					
+						
 					list.add(vocabularycontent);
+					System.out.println("3");
 				}
 			}
 			else 
 			{
 				request.setAttribute("msgndchudetuvung","Không có nội dung nào");
+				System.out.println("2");
 			}
 			
 		} 
 		catch (SQLException e) 
 		{
 			request.setAttribute("msgndchudetuvung",e.getMessage());
+			System.out.println(e.getMessage());
+			System.out.println("3");
 		}
 				
 		return list;

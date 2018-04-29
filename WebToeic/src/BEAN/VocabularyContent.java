@@ -7,7 +7,6 @@ public class VocabularyContent {
 	private String transcribe;
 	private String image;
 	private String audiomp3;
-	private String audiogg;
 	private String mean;
 	private int vocabularyguidelineid;
 	
@@ -49,12 +48,8 @@ public class VocabularyContent {
 	public void setAudiomp3(String audiomp3) {
 		this.audiomp3 = audiomp3;
 	}
-	public String getAudiogg() {
-		return audiogg;
-	}
-	public void setAudiogg(String audiogg) {
-		this.audiogg = audiogg;
-	}
+
+	
 	public String getMean() {
 		return mean;
 	}

@@ -457,7 +457,7 @@ public class VocabularyDAO {
 								
 								String image = row.getCell(3).getStringCellValue();
 								String audiomp3 = row.getCell(4).getStringCellValue();
-								String audiogg = row.getCell(5).getStringCellValue();
+								//String audiogg = row.getCell(5).getStringCellValue();
 								String mean = row.getCell(6).getStringCellValue();
 								
 								
@@ -468,7 +468,7 @@ public class VocabularyDAO {
 								ex.setTranscribe(transcribe);
 								ex.setImage(image);
 								ex.setAudiomp3(audiomp3);
-								ex.setAudiogg(audiogg);
+							//	ex.setAudiogg(audiogg);
 								ex.setMean(mean);
 								ex.setVocabularyguidelineid(vocabularyguidelineid);
 								
@@ -495,9 +495,9 @@ public class VocabularyDAO {
 					//Them noi dung tu vung vao mysql
 					public static void Themndtuvungvaomysql(HttpServletRequest request,VocabularyContent ex, Connection conn)
 					{
-						String sql = "insert into vocabularyContent(num,vocabularyContentName,transcribe,image,audioMp3,audioGg,mean,vocabularyGuidelineId) values"
+						String sql = "insert into vocabularyContent(num,vocabularyContentName,transcribe,image,audioMp3,mean,vocabularyGuidelineId) values"
 								+ "("+ex.getNum()+",'"+ex.getVocabularycontentname()+"',N'"+ex.getTranscribe()+"','"+ex.getImage()+"','"
-										+ ex.getAudiomp3()+"','"+ex.getAudiogg()+"',N'"+ex.getMean()+"',"+ex.getVocabularyguidelineid()+")";
+										+ ex.getAudiomp3()+"','"+ex.getMean()+"',"+ex.getVocabularyguidelineid()+")";
 								
 						try 
 						{

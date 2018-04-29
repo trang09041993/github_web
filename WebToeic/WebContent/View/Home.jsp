@@ -227,14 +227,14 @@
 		        </div>
 		        <div class="modal-body">
 	         	
-						<!-- <div class="media">
-							<a class="pull-left"><img src="Template/FrontendAdmin/images/loaibtnghe.png" class="media-object" alt='' /></a>
+						 <div class="media">
+							<!-- <a class="pull-left"><img src="Template/FrontendAdmin/images/loaibtnghe.png" class="media-object" alt='' /></a>
 							<div class="media-body">
 								<h4>
 									<a href="Hienthidshdtuvung?pageid=1">Bài hướng dẫn phần nghe</a>
 								</h4> 					
-							</div>
-						</div> -->
+							</div> -->
+						</div>
 						
 						<div class="media">
 							<a class="pull-left"><img src="Template/FrontendAdmin/images/loaibtnghe.png" class="media-object" alt='' /></a>

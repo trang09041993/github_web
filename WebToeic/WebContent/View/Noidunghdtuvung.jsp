@@ -81,7 +81,7 @@
 										
 										<p>
 												<audio controls>
-														<source src="ImageAudioVocab/${list.audiogg}" type="audio/ogg">
+														<%-- <source src="ImageAudioVocab/${list.audiogg}" type="audio/ogg"> --%>
 														<source src="ImageAudioVocab/${list.audiomp3}" type="audio/mpeg">
 												</audio>
 										</p>
