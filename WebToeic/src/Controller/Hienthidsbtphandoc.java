@@ -39,7 +39,7 @@ public class Hienthidsbtphandoc extends HttpServlet {
 			
 			
 			int pageid = Integer.parseInt(pageidstr);
-			int count = 3;
+			int count = 4;
 			
 			
 			if (pageid == 1)

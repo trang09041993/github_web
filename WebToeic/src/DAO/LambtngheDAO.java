@@ -21,7 +21,8 @@ public class LambtngheDAO
 	{
 		List<Listenexercise> list = new ArrayList<Listenexercise>();
 		
-		String sql = "select * from listenexercise ORDER BY listenexerciseid OFFSET "+(start-1)+" ROWS FETCH NEXT "+count+" ROWS ONLY";
+		String sql1 = "select * from Question where type=false and ORDER BY listenexerciseid OFFSET "+(start-1)+" ROWS FETCH NEXT "+count+" ROWS ONLY";
+		String sql="select * from Question where type=+'"+false+"' ORDER BY QuestionId OFFSET "+(start-1)+" ROWS FETCH NEXT "+count+" ROWS ONLY";
 		try 
 		{
 			PreparedStatement ptmt = conn.prepareStatement(sql);
@@ -34,15 +35,15 @@ public class LambtngheDAO
 				{
 					Listenexercise listenexercise = new Listenexercise();
 					
-					int listenexerciseid = rs.getInt("listenexerciseid");
-					String listenexercisename = rs.getString("listenexercisename");
-					String listenexerciseimage = rs.getString("listenexerciseimage");
-					int checkcauhoi = rs.getInt("checkcauhoi");
+					int listenexerciseid = rs.getInt("QuestionId");
+					String listenexercisename = rs.getString("topic");
+					String listenexerciseimage = rs.getString("imageQuestion");
+				//	int checkcauhoi = rs.getInt("checkcauhoi");
 					
 					listenexercise.setListenexerciseid(listenexerciseid);
 					listenexercise.setListenexercisename(listenexercisename);
 					listenexercise.setListenexerciseimage(listenexerciseimage);
-					listenexercise.setCheckcauhoi(checkcauhoi);
+					//listenexercise.setCheckcauhoi(checkcauhoi);
 					list.add(listenexercise);
 				}
 			}
@@ -66,7 +67,7 @@ public class LambtngheDAO
 		int count = 0;
 		
 		
-		String sql = "select count(*) from listenexercise";
+		String sql = "select count(*) from Question where type='"+false+"'";
 		
 		try 
 		{
@@ -91,11 +92,11 @@ public class LambtngheDAO
 	
 	//hien thi danh sach de thi va phan trang
 	
-	public static List<Listenquestion> Hienthicauhoibtnghe(HttpServletRequest request,int start, int count,Connection conn,int listenexerciseid)
+	public static List<Listenquestion> Hienthicauhoibtnghe(HttpServletRequest request,int start, int count,Connection conn,String listenexercisename)
 	{
 		List<Listenquestion> list = new ArrayList<Listenquestion>();
 		
-		String sql = "select * from listenQuestion where listenExerciseId OFFSET "+(start-1)+" ROWS FETCH NEXT "+count+" ROWS ONLY";
+		String sql = "select * from Question where topic = '"+listenexercisename+"'ORDER BY QuestionId OFFSET "+(start-1)+" ROWS FETCH NEXT "+count+" ROWS ONLY";
 		try 
 		{
 			PreparedStatement ptmt = conn.prepareStatement(sql);
@@ -107,10 +108,10 @@ public class LambtngheDAO
 				{
 					Listenquestion listenquestion = new Listenquestion();
 					
-					int num = rs.getInt("num");
-					String imagename  = rs.getString("imageName");
+					//int num = rs.getInt("num");
+					String imagename  = rs.getString("imageQuestion");
 					String audiomp3  = rs.getString("audioMp3");
-					String audiogg  = rs.getString("audioGg");
+					//String audiogg  = rs.getString("audioGg");
 					String question = rs.getString("question");
 					String option1 = rs.getString("option1");
 					String option2 = rs.getString("option2");
@@ -118,10 +119,10 @@ public class LambtngheDAO
 					String option4 = rs.getString("option4");
 				
 					
-					listenquestion.setNum(num);
+				//	listenquestion.setNum(num);
 					listenquestion.setImagename(imagename);
 					listenquestion.setAudiomp3(audiomp3);
-					listenquestion.setAudiogg(audiogg);
+					//listenquestion.setAudiogg(audiogg);
 					listenquestion.setQuestion(question);
 					listenquestion.setOption1(option1);
 					listenquestion.setOption2(option2);
@@ -141,12 +142,12 @@ public class LambtngheDAO
 	}
 	
 	//dem so hang cua 1 bang
-	public static int Demcauhoitheoma(Connection conn,int listenexerciseid)
+	public static int Demcauhoitheoma(Connection conn,String  listenexercisename)
 	{
 		int count = 0;
 		
 		
-		String sql = "select count(*) from listenQuestion where listenExerciseId="+listenexerciseid;
+		String sql = "select count(*) from Question where topic='"+listenexercisename+"'";
 		
 		try 
 		{
@@ -172,11 +173,11 @@ public class LambtngheDAO
 	
 	//xuat dap an dung theo cau hoi bt doc
 	
-	public static List<Listenquestion> Xuatdapanbtnghe(HttpServletRequest request,Connection conn,int listenexerciseid,int num)
+	public static List<Listenquestion> Xuatdapanbtnghe(HttpServletRequest request,Connection conn,String listenexercisename)
 	{
 		List<Listenquestion> list = new ArrayList<Listenquestion>();
 		
-		String sql = "select * from listenQuestion where listenExerciseId= "+listenexerciseid+" and num="+num;
+		String sql = "select * from Question where topic= "+listenexercisename;
 		try 
 		{
 			PreparedStatement ptmt = conn.prepareStatement(sql);
@@ -188,10 +189,11 @@ public class LambtngheDAO
 				{
 					Listenquestion listenquestion = new Listenquestion();
 					
-					int num1 = rs.getInt("num");
-					String imagename  = rs.getString("imageName");
+					//int num1 = rs.getInt("num");
+					//int questionid=rs.getInt("QuestionId")
+					String imagename  = rs.getString("imageQuestion");
 					String audiomp3  = rs.getString("audioMp3");
-					String audiogg  = rs.getString("audioGg");
+					//String audiogg  = rs.getString("audioGg");
 					String question = rs.getString("question");
 					String option1 = rs.getString("option1");
 					String option2 = rs.getString("option2");
@@ -199,10 +201,10 @@ public class LambtngheDAO
 					String option4 = rs.getString("option4");
 					String correctanswer = rs.getString("correctAnswer");
 					
-					listenquestion.setNum(num1);
+					//listenquestion.setNum(num1);
 					listenquestion.setImagename(imagename);
 					listenquestion.setAudiomp3(audiomp3);
-					listenquestion.setAudiogg(audiogg);
+					//listenquestion.setAudiogg(audiogg);
 					listenquestion.setQuestion(question);
 					listenquestion.setOption1(option1);
 					listenquestion.setOption2(option2);

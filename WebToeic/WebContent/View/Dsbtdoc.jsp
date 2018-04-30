@@ -79,7 +79,7 @@
 											${list.readname}
 										</p>
 										
-										<a href="Lambtdoc?pageid=1&readexeriseid=${list.readexeriseid}" class="btn" type="button">Làm bài tập</a>
+										<a href="Lambtdoc?pageid=1&readname=${list.readname}" class="btn" type="button">Làm bài tập</a>
 									</div>
 								</div>						
 						</div>	

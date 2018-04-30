@@ -20,7 +20,7 @@ public class LambtphandocDAO
 			{
 				List<Readexercise> list = new ArrayList<Readexercise>();
 				
-				String sql = "select * from readExercise ORDER BY readExerciseId OFFSET "+(start-1)+" ROWS FETCH NEXT "+count+" ROWS ONLY";
+				String sql = "select * from Question where type=+'"+true+"' ORDER BY QuestionId OFFSET "+(start-1)+" ROWS FETCH NEXT "+count+" ROWS ONLY";
 				try 
 				{
 					PreparedStatement ptmt = conn.prepareStatement(sql);
@@ -33,15 +33,15 @@ public class LambtphandocDAO
 						{
 							Readexercise readexercise = new Readexercise();
 							
-							int readexeriseid = rs.getInt("readExerciseId");
-							String readname = rs.getString("readName");
-							String readimage = rs.getString("readImage");
-							int checkcauhoi = rs.getInt("checkcauhoi");
+							int readexeriseid = rs.getInt("QuestionId");
+							String readname = rs.getString("topic");
+							String readimage = rs.getString("imageQuestion");
+							//int checkcauhoi = rs.getInt("checkcauhoi");
 							
 							readexercise.setReadexeriseid(readexeriseid);
 							readexercise.setReadname(readname);
 							readexercise.setReadimage(readimage);
-							readexercise.setCheckcauhoi(checkcauhoi);
+						//	readexercise.setCheckcauhoi(checkcauhoi);
 							
 							list.add(readexercise);
 						}
@@ -66,7 +66,7 @@ public class LambtphandocDAO
 				int count = 0;
 				
 				
-				String sql = "select count(*) from readExercise";
+				String sql = "select count(*) from Question where type='"+true+"'";
 				
 				try 
 				{
@@ -91,11 +91,12 @@ public class LambtphandocDAO
 			
 			//hien thi danh sach de thi va phan trang
 			
-			public static List<Readquestion> Hienthicauhoibtdoc(HttpServletRequest request,int start, int count,Connection conn,int readexeriseid)
+			public static List<Readquestion> Hienthicauhoibtdoc(HttpServletRequest request,int start, int count,Connection conn,String listenexercisename)
 			{
 				List<Readquestion> list = new ArrayList<Readquestion>();
 				
-				String sql = "select * from readQuestion where readExeriseId= "+readexeriseid+"OFFSET "+(start-1)+" ROWS FETCH NEXT "+count+" ROWS ONLY";
+				/*String sql1 = "select * from readQuestion where readExeriseId= "+readexeriseid+"OFFSET "+(start-1)+" ROWS FETCH NEXT "+count+" ROWS ONLY";*/
+				String sql = "select * from Question where topic = '"+listenexercisename+"'ORDER BY QuestionId OFFSET "+(start-1)+" ROWS FETCH NEXT "+count+" ROWS ONLY";
 				try 
 				{
 					PreparedStatement ptmt = conn.prepareStatement(sql);
@@ -107,7 +108,7 @@ public class LambtphandocDAO
 						{
 							Readquestion readquestion = new Readquestion();
 							
-							int num = rs.getInt("num");
+						//	int num = rs.getInt("num");
 							String question = rs.getString("question");
 							String option1 = rs.getString("option1");
 							String option2 = rs.getString("option2");
@@ -115,7 +116,7 @@ public class LambtphandocDAO
 							String option4 = rs.getString("option4");
 						
 							
-							readquestion.setNum(num);
+						//	readquestion.setNum(num);
 							readquestion.setQuestion(question);
 							readquestion.setOption1(option1);
 							readquestion.setOption2(option2);
@@ -135,12 +136,12 @@ public class LambtphandocDAO
 			}
 			
 			//dem so hang cua 1 bang
-			public static int Demcauhoitheoma(Connection conn,int readexeriseid)
+			public static int Demcauhoitheoma(Connection conn,String  listenexercisename)
 			{
 				int count = 0;
 				
 				
-				String sql = "select count(*) from readQuestion where readExeriseId="+readexeriseid;
+				String sql = "select count(*) from Question where topic='"+listenexercisename+"'";
 				
 				try 
 				{
@@ -165,11 +166,11 @@ public class LambtphandocDAO
 			
 			//xuat dap an dung theo cau hoi bt doc
 			
-			public static List<Readquestion> Xuatdapanbtdoc(HttpServletRequest request,Connection conn,int readexeriseid,int num)
+			public static List<Readquestion> Xuatdapanbtdoc(HttpServletRequest request,Connection conn,String listenexercisename)
 			{
 				List<Readquestion> list = new ArrayList<Readquestion>();
 				
-				String sql = "select * from readQuestion where readExeriseId= "+readexeriseid+" and num="+num;
+				String sql = "select * from Question where topic= "+listenexercisename;
 				try 
 				{
 					PreparedStatement ptmt = conn.prepareStatement(sql);
@@ -181,7 +182,7 @@ public class LambtphandocDAO
 						{
 							Readquestion readquestion = new Readquestion();
 							
-							int num1 = rs.getInt("num");
+						//	int num1 = rs.getInt("num");
 							String question = rs.getString("question");
 							String option1 = rs.getString("option1");
 							String option2 = rs.getString("option2");
@@ -189,7 +190,7 @@ public class LambtphandocDAO
 							String option4 = rs.getString("option4");
 							String correctanswer = rs.getString("correctAnswer");
 							
-							readquestion.setNum(num1);
+						//	readquestion.setNum(num1);
 							readquestion.setQuestion(question);
 							readquestion.setOption1(option1);
 							readquestion.setOption2(option2);

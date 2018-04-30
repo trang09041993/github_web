@@ -79,7 +79,7 @@
 											${list.listenexercisename}
 										</p>
 										
-										<a href="Lambtnghe?pageid=1&listenexerciseid=${list.listenexerciseid}" class="btn" type="button">Làm bài tập</a>
+										<a href="Lambtnghe?pageid=1&listenexercisename=${list.listenexercisename}" class="btn" type="button">Làm bài tập</a>
 									</div>
 								</div>						
 						</div>	
