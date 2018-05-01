@@ -31,12 +31,12 @@ import BEAN.Examinationquestion;
 
 public class ExamManage {
 	//hien thi danh sach de thi va phan trang
-		public static List<Examination> Hienthidsdethi(HttpServletRequest request,int start, int count,Connection conn)
+		public static List<Examinationquestion> Hienthidsdethi(HttpServletRequest request,int start, int count,Connection conn)
 		{
-			List<Examination> list = new ArrayList<Examination>();
+			List<Examinationquestion> list = new ArrayList<Examinationquestion>();
 			
 			//String sql = "select * from examination limit "+(start-1)+", "+count+"";
-			String sql="SELECT * FROM examination ORDER BY examinationId OFFSET "+(start-1)+" ROWS FETCH NEXT "+count+" ROWS ONLY";
+			String sql="SELECT * FROM Question ORDER BY QuestionId OFFSET "+(start-1)+" ROWS FETCH NEXT "+count+" ROWS ONLY";
 			try 
 			{
 				PreparedStatement ptmt = conn.prepareStatement(sql);
@@ -47,19 +47,35 @@ public class ExamManage {
 				{
 					while (rs.next())
 					{
-						Examination examination = new Examination();
+						Examinationquestion question = new Examinationquestion();
 						
-						int examinationid = rs.getInt("examinationId");
-						String examinationame = rs.getString("examinationName");
-						String examinatioimage = rs.getString("examinationImage");
-						int checkedcauhoi = rs.getInt("checkedcauhoi");
+						int id=rs.getInt("QuestionId");
+						int part = rs.getInt("part");
+						String topic = rs.getString("topic");
+						String image = rs.getString("imageQuestion");
+						String audio = rs.getString("audioMp3");
+						String paragraph = rs.getString("paragraph");
+						String questions = rs.getString("question");
+						String option1 = rs.getString("option1");
+						String option2 = rs.getString("option2");
+						String option3 = rs.getString("option3");
+						String option4 = rs.getString("option4");
+						String correct = rs.getString("correctAnswer");
 						
-						examination.setExaminationid(examinationid);
-						examination.setExaminationame(examinationame);
-						examination.setExaminatioimage(examinatioimage);
-						examination.setCheckedcauhoi(checkedcauhoi);
+						question.setExaminationid(id);
+						question.setAudiomp3(audio);
+						question.setCorrectanswer(correct);
+						question.setImagequestion(image);
+						question.setOption1(option1);
+						question.setOption2(option2);
+						question.setOption3(option3);
+						question.setOption4(option4);
+						question.setParagraph(paragraph);
+						question.setQuestion(questions);
+						question.setTopic(topic);
+						question.setPart(part);
 						
-						list.add(examination);
+						list.add(question);
 					}
 				}
 				else 
@@ -304,7 +320,7 @@ public class ExamManage {
 					
 					//ham theo file excel vao thu muc fildethi trong project
 					
-					public static String Uploadcauhoidethi(Connection conn, HttpServletRequest request,HttpServletResponse response,int examinationid) 
+					public static String Uploadcauhoidethi(Connection conn, HttpServletRequest request,HttpServletResponse response) 
 							throws ServletException, IOException 
 					{
 						String test = "";
@@ -379,7 +395,7 @@ public class ExamManage {
 							    			try
 							    			{
 							    				System.out.println("12");
-							    				ExamManage.Themcauhoituexcel(request, response, conn, pathFile, examinationid);
+							    				ExamManage.Themcauhoituexcel(request, response, conn, pathFile);
 							    				
 							    			}
 							    			catch(NullPointerException e)
@@ -417,7 +433,7 @@ public class ExamManage {
 					
 					
 					//them cau hoi de thi tu file excel
-					public static void Themcauhoituexcel(HttpServletRequest request,HttpServletResponse response, Connection conn, String address, int examinationid) 
+					public static void Themcauhoituexcel(HttpServletRequest request,HttpServletResponse response, Connection conn, String address) 
 							throws ServletException, IOException
 					{
 						FileInputStream inp;
@@ -435,23 +451,29 @@ public class ExamManage {
 							{
 								Row row = sheet.getRow(i);
 								
-								int num = (int) row.getCell(0).getNumericCellValue();			
-								String imagequestion = row.getCell(1,Row.CREATE_NULL_AS_BLANK).getStringCellValue();
-								String audiogg = row.getCell(2,Row.CREATE_NULL_AS_BLANK).getStringCellValue();
-								String audiomp3 = row.getCell(3,Row.CREATE_NULL_AS_BLANK).getStringCellValue();
-								String paragraph = row.getCell(4,Row.CREATE_NULL_AS_BLANK).getStringCellValue();
-								String question = row.getCell(5,Row.CREATE_NULL_AS_BLANK).getStringCellValue();
-								String option1 = row.getCell(6).getStringCellValue();
-								String option2 = row.getCell(7).getStringCellValue();
-								String option3 = row.getCell(8).getStringCellValue();
-								String option4 = row.getCell(9).getStringCellValue();
-								String correctanswer = row.getCell(10).getStringCellValue();
+								int type= (int ) row.getCell(0).getNumericCellValue();
+								String type0=Integer.toString(type);
+								boolean type1 = Boolean.parseBoolean(type0);
+								int part = (int) row.getCell(1).getNumericCellValue();	
+								String topic = row.getCell(2).getStringCellValue();
+								String imagequestion = row.getCell(3,Row.CREATE_NULL_AS_BLANK).getStringCellValue();
+								
+								String audiomp3 = row.getCell(4,Row.CREATE_NULL_AS_BLANK).getStringCellValue();
+								String paragraph = row.getCell(5,Row.CREATE_NULL_AS_BLANK).getStringCellValue();
+								String question = row.getCell(6,Row.CREATE_NULL_AS_BLANK).getStringCellValue();
+								String option1 = row.getCell(7).getStringCellValue();
+								String option2 = row.getCell(8).getStringCellValue();
+								String option3 = row.getCell(9).getStringCellValue();
+								String option4 = row.getCell(10).getStringCellValue();
+								String correctanswer = row.getCell(11).getStringCellValue();
 								
 								Examinationquestion ex = new Examinationquestion();
 								
-								ex.setNum(num);
+								//ex.setNum(num);
+								ex.setType(type1);
 								ex.setImagequestion(imagequestion);
-								ex.setAudiogg(audiogg);
+								ex.setTopic(topic);
+								ex.setPart(part);
 								ex.setAudiomp3(audiomp3);
 								ex.setParagraph(paragraph);
 								ex.setQuestion(question);
@@ -460,7 +482,7 @@ public class ExamManage {
 								ex.setOption3(option3);
 								ex.setOption4(option4);
 								ex.setCorrectanswer(correctanswer);
-								ex.setExaminationid(examinationid);
+								//ex.setExaminationid(examinationid);
 								
 								ExamManage.Themcauhoivaomysql(request, ex, conn);
 								
@@ -486,25 +508,27 @@ public class ExamManage {
 					//Them cau hoi vao mysql
 					public static void Themcauhoivaomysql(HttpServletRequest request,Examinationquestion ex, Connection conn)
 					{
-						String sql = "insert into examinationQuestion(num,imageQuestion,audioGg,audioMp3,paragraph,question,"
-								+ "option1,option2,option3,option4,correctAnswer,examinationId) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+						String sql = "insert into Question(imageQuestion,audioMp3,paragraph,question,"
+								+ "option1,option2,option3,option4,correctAnswer,type,part,topic) values (?,?,?,?,?,?,?,?,?,?,?,?)";
 						try 
 						{
 							PreparedStatement ptmt = conn.prepareStatement(sql);
 							
 							
-							ptmt.setInt(1,ex.getNum());
-							ptmt.setString(2,ex.getImagequestion());
-							ptmt.setString(3,ex.getAudiogg());
-							ptmt.setString(4,ex.getAudiomp3());
-							ptmt.setString(5,ex.getParagraph());
-							ptmt.setString(6,ex.getQuestion());
-							ptmt.setString(7,ex.getOption1());
-							ptmt.setString(8,ex.getOption2());
-							ptmt.setString(9,ex.getOption3());
-							ptmt.setString(10,ex.getOption4());
-							ptmt.setString(11,ex.getCorrectanswer());
-							ptmt.setInt(12,ex.getExaminationid());
+							
+							ptmt.setString(1,ex.getImagequestion());
+							
+							ptmt.setString(2,ex.getAudiomp3());
+							ptmt.setString(3,ex.getParagraph());
+							ptmt.setString(4,ex.getQuestion());
+							ptmt.setString(5,ex.getOption1());
+							ptmt.setString(6,ex.getOption2());
+							ptmt.setString(7,ex.getOption3());
+							ptmt.setString(8,ex.getOption4());
+							ptmt.setString(9,ex.getCorrectanswer());
+							ptmt.setBoolean(10, ex.isType());
+							ptmt.setInt(11,ex.getPart());
+							ptmt.setString(12,ex.getTopic());
 							
 							ptmt.executeUpdate();
 							ptmt.close();

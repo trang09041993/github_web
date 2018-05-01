@@ -6,6 +6,7 @@ public class Examinationquestion {
 	private int	num;
 	private String imagequestion;
 	private String audiogg;
+	
 	private String audiomp3;
 	private String paragraph;
 	private String question;
@@ -15,7 +16,54 @@ public class Examinationquestion {
 	private String option4;
 	private String correctanswer;		
 	private int	examinationid;
+	private int part;
+	private String topic;
+	private boolean type;
 	
+	public boolean isType() {
+		return type;
+	}
+
+	public void setType(boolean type) {
+		this.type = type;
+	}
+
+	public Examinationquestion() {
+		super();
+	}
+	
+	public Examinationquestion(int examinationquestionid, int num, String imagequestion, String audiogg,
+			String audiomp3, String paragraph, String question, String option1, String option2, String option3,
+			String option4, String correctanswer, int examinationid, int part, String topic) {
+		super();
+		this.examinationquestionid = examinationquestionid;
+		this.num = num;
+		this.imagequestion = imagequestion;
+		this.audiogg = audiogg;
+		this.audiomp3 = audiomp3;
+		this.paragraph = paragraph;
+		this.question = question;
+		this.option1 = option1;
+		this.option2 = option2;
+		this.option3 = option3;
+		this.option4 = option4;
+		this.correctanswer = correctanswer;
+		this.examinationid = examinationid;
+		this.part = part;
+		this.topic = topic;
+	}
+	public int getPart() {
+		return part;
+	}
+	public void setPart(int part) {
+		this.part = part;
+	}
+	public String getTopic() {
+		return topic;
+	}
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
 	public int getExaminationquestionid() {
 		return examinationquestionid;
 	}

@@ -91,6 +91,21 @@
 								<div class="hr hr-18 dotted hr-double"></div>
 							</c:if>
 							
+							<div class="row">
+										<div class="col-xs-12">
+											<!-- <button type="button" class="btn btn-white btn-warning btn-bold" data-toggle="modal" data-target="#myModal">
+												
+												Add exam
+											</button> -->
+											
+											<a href="AddQuestiontoExam" role="button" class="btn btn-white btn-warning btn-bold">Add questions from Excel</a>
+											
+										</div>
+										
+									</div>
+									
+								<br></br>
+							
 							
 							<div class="row" >
 								<div class="col-xs-12">
@@ -101,23 +116,35 @@
 												<thead>
 													<tr>
 														<th class="center">
-														    ID
+														    ID-part
 														</th>
 														<th class="center">
-															Name
+															Name-topic
 														</th>
 														<th class="center">
 															Image
 														</th>
+														<th class="center" width="350">
+														    paragraph
+														</th>
+														<th class="center" width="250">
+															question
+														</th>
+														<th class="center" width="150">
+															option
+														</th>
 														<th class="center">
-															Delete
+															correct answer
+														</th>
+														<th class="center">
+															Edit question
 														</th>
 														<th class="center">
 															Add question
 														</th>
-														<th class="center">
+														<!-- <th class="center">
 															Checked question
-														</th>
+														</th> -->
 													</tr>
 												</thead>
 												<tbody>
@@ -125,28 +152,46 @@
 													<c:forEach items="${danhsachdethi}" var ="list">
 														<tr>
 															<td class="center">
-																${list.examinationid}
+																${list.part}
 															</td>
 															<td class="center">
-																${list.examinationame}
+																${list.topic}
 															</td>
 															<td class="center">
-																${list.examinatioimage}
+																${list.imagequestion}
+															</td>
+															<td class="center">
+																${list.paragraph}
+															</td>
+															<td class="center">
+																${list.question}
+															</td>
+															<td class="center">
+																${list.option1}<br>
+																
+																${list.option2}<br>
+															
+																${list.option3}<br>
+															
+																${list.option4}<br>
+															</td>
+															<td class="center">
+																${list.correctanswer}
 															</td>
 															
 															<td class="center">
 																<a class="red" href="#">
-																	<i class="ace-icon fa fa-trash-o bigger-130"></i>
+																	<i class="ace-icon fa fa-pencil bigger-130"></i>
 																</a>
 																
 															</td>
 															
 															<td class="center">
 																<a class="green" href="AddQuestiontoExam?examinationid=${list.examinationid}">
-																	<i class="ace-icon fa fa-pencil bigger-130"></i>
+																	<i class="ui-icon ace-icon fa fa-plus center bigger-110 blue"></i>
 																</a>
 															</td>
-															<td class="center">
+															<%-- <td class="center">
 																<ul class="list-unstyled">
 																	<c:if test="${list.checkedcauhoi==1}">
 																		<li>
@@ -160,7 +205,7 @@
 																	</c:if>											
 																</ul>
 																
-															</td>
+															</td> --%>
 															
 														</tr>
 													</c:forEach>
@@ -196,18 +241,7 @@
 										</div>
 									</div>
 									
-									<div class="row">
-										<div class="col-xs-12">
-											<button type="button" class="btn btn-white btn-warning btn-bold" data-toggle="modal" data-target="#myModal">
-												
-												Add exam
-											</button>
-											
-											<a href="AddAudioImageToExam" role="button" class="btn btn-white btn-warning btn-bold">Add audio+image</a>
-											
-										</div>
-										
-									</div>
+									
 									
 									
 									

@@ -45,14 +45,14 @@ public class AddQuestiontoExam extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		String examinationidstr = request.getParameter("examinationid");
-		int examinationid = Integer.parseInt(examinationidstr);
+		/*String examinationidstr = request.getParameter("examinationid");
+		int examinationid = Integer.parseInt(examinationidstr);*/
 		
-		String test = ExamManage.Uploadcauhoidethi(conn, request, response, examinationid);
+		String test = ExamManage.Uploadcauhoidethi(conn, request, response);
 		
 		if (test.equals("Success"))
 		{
-			ExamManage.Kiemtracauhoidethi(request, conn,1, examinationid); 
+			//ExamManage.Kiemtracauhoidethi(request, conn,1, examinationid); 
 			
 			RequestDispatcher rd = request.getRequestDispatcher("ExamDisplayAdmin?pageid=1");
 			rd.forward(request,response);	
@@ -60,7 +60,7 @@ public class AddQuestiontoExam extends HttpServlet {
 		else 
 		{
 			request.setAttribute("msgthemcauhoidethi",test);
-			request.setAttribute("examinationid", examinationid);
+			//request.setAttribute("examinationid", examinationid);
 	    	RequestDispatcher rd = request.getRequestDispatcher("View/Admin/AddQuestionToExam.jsp");
 			rd.forward(request,response);		 
 		}

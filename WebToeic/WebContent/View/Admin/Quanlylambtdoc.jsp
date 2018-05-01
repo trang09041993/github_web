@@ -59,7 +59,7 @@
 							</li>
 							
 							<li>
-								<a class="active">Quản lý danh sách bài tập đọc</a>
+								<a class="active">Quản lý danh sách bài tập</a>
 							</li>
 							
 						</ul><!-- /.breadcrumb -->
@@ -88,7 +88,7 @@
 														    ID
 														</th>
 														<th class="center">
-															Tên bài tập đọc
+															Tên bài tập
 														</th>
 														<th class="center">
 															Tên hình bài tập đọc

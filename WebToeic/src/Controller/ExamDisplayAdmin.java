@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import BEAN.Examination;
+import BEAN.Examinationquestion;
 import DAO.ExamManage;
 import DB.DBConnetion;
 
@@ -52,7 +53,7 @@ public class ExamDisplayAdmin extends HttpServlet {
 			
 			Connection conn = DBConnetion.getSQLServerConnection();
 			
-			List<Examination> list = ExamManage.Hienthidsdethi(request, pageid, count, conn);
+			List<Examinationquestion> list = ExamManage.Hienthidsdethi(request, pageid, count, conn);
 			
 			
 			int sumrow = ExamManage.Countrow(conn);
